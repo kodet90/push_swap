@@ -6,7 +6,7 @@
 /*   By: swilmer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 20:52:10 by swilmer           #+#    #+#             */
-/*   Updated: 2021/10/08 08:59:49 by swilmer          ###   ########.fr       */
+/*   Updated: 2021/10/17 03:11:39 by swilmer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_lstclear_malloc(t_list **lst, void (*del)(void *))
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		ft_lstdelone(*lst, del);
+		ft_lstdelone_malloc(*lst, del);
 		*lst = temp;
 	}
 }

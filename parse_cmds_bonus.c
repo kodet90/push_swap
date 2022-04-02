@@ -6,59 +6,103 @@
 /*   By: swilmer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:16:11 by swilmer           #+#    #+#             */
-/*   Updated: 2021/10/10 15:36:51 by swilmer          ###   ########.fr       */
+/*   Updated: 2021/10/11 15:57:43 by swilmer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-static int	parse_cmd_bonus2(t_pp *a, t_pp *b, char *s)
+static int	parse_cmd_bonus4(t_pp *a, t_pp *b, char *s)
 {
-	if (!ft_strcmp("ra\n", s))
-		a->l = a->l->next;
-	else if (!ft_strcmp("rb\n", s))
-		b->l = b->l->next;
-	else if (!ft_strcmp("rr\n", s))
+	if (!ft_strcmp("rrb\n", s))
 	{
-		a->l = a->l->next;
-		b->l = b->l->next;
+		if (b->count)
+			b->l = b->l->prev;
 	}
-	else if (!ft_strcmp("rra\n", s))
-		a->l = a->l->prev;
-	else if (!ft_strcmp("rrb\n", s))
-		b->l = b->l->prev;
 	else if (!ft_strcmp("rrr\n", s))
 	{
-		a->l = a->l->prev;
-		b->l = b->l->prev;
+		if (a->count)
+			a->l = a->l->prev;
+		if (b->count)
+			b->l = b->l->prev;
 	}
 	else
 		return (-1);
 	return (0);
 }
 
-static int	parse_cmd_bonus(t_pp *a, t_pp *b, char *s)
+static int	parse_cmd_bonus3(t_pp *a, t_pp *b, char *s)
 {
-	if (!ft_strcmp("sa\n", s))
-		pslstadd_front(&a->l, pslstext(&a->l, a->l->next));
-	else if (!ft_strcmp("sb\n", s))
-		pslstadd_front(&b->l, pslstext(&b->l, b->l->next));
-	else if (!ft_strcmp("ss\n", s))
-	{	
-		pslstadd_front(&a->l, pslstext(&a->l, a->l->next));
-		pslstadd_front(&b->l, pslstext(&b->l, b->l->next));
-	}
-	else if (!ft_strcmp("pa\n", s))
+	if (!ft_strcmp("ra\n", s))
 	{
-		pslstadd_front(&a->l, pslstext(&b->l, b->l));
-		a->count++;
-		b->count--;
+		if (a->count)
+			a->l = a->l->next;
+	}
+	else if (!ft_strcmp("rb\n", s))
+	{
+		if (b->count)
+			b->l = b->l->next;
+	}
+	else if (!ft_strcmp("rr\n", s))
+	{
+		if (a->count)
+			a->l = a->l->next;
+		if (b->count)
+			b->l = b->l->next;
+	}
+	else if (!ft_strcmp("rra\n", s))
+	{
+		if (a->count)
+			a->l = a->l->prev;
+	}
+	else
+		return (parse_cmd_bonus4(a, b, s));
+	return (0);
+}
+
+static int	parse_cmd_bonus2(t_pp *a, t_pp *b, char *s)
+{
+	if (!ft_strcmp("pa\n", s))
+	{
+		if (b->count)
+		{
+			pslstadd_front(&a->l, pslstext(&b->l, b->l));
+			a->count++;
+			b->count--;
+		}
 	}
 	else if (!ft_strcmp("pb\n", s))
 	{
-		pslstadd_front(&b->l, pslstext(&a->l, a->l));
-		a->count--;
-		b->count++;
+		if (a->count)
+		{
+			pslstadd_front(&b->l, pslstext(&a->l, a->l));
+			a->count--;
+			b->count++;
+		}
+	}
+	else
+		return (parse_cmd_bonus3(a, b, s));
+	return (0);
+}
+
+static int	parse_cmd_bonus(t_pp *a, t_pp *b, char *s)
+{
+	if (!ft_strcmp("sa\n", s))
+	{
+		if (a->count)
+			pslstadd_front(&a->l, pslstext(&a->l, a->l->next));
+	}
+	else if (!ft_strcmp("sb\n", s))
+	{
+		if (b->count)
+			pslstadd_front(&b->l, pslstext(&b->l, b->l->next));
+	}
+	else if (!ft_strcmp("ss\n", s))
+	{	
+		if (a->count)
+			pslstadd_front(&a->l, pslstext(&a->l, a->l->next));
+		if (b->count)
+			pslstadd_front(&b->l, pslstext(&b->l, b->l->next));
 	}
 	else
 		return (parse_cmd_bonus2(a, b, s));
