@@ -1,5 +1,8 @@
 # push_swap
 
+![](https://img.shields.io/badge/Language-C-blue)
+![](https://img.shields.io/badge/School-42-black)
+
 A program that sorts data on a stack, with a limited set of instructions, using
 the lowest possible number of actions
 
