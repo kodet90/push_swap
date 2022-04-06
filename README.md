@@ -14,7 +14,7 @@ the lowest possible number of actions
 * The goal is to sort in ascending order numbers into stack a. To do so you have the
 following operations at your disposal:
 
-| Command                   | Description                                                                                       |
+| Operation                 | Description                                                                                       |
 |:-------------------------:|:-------------------------------------------------------------------------------------------------:|
 | sa (swap a)               | Swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements.  |
 | sb (swap b)               | Swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements.  |
@@ -41,7 +41,7 @@ following operations at your disposal:
 ./push_swap 9 4 8 7 1 3 6 2 5
 ```
 
-it will produce the least commands required to sort the stack
+it will produce the least operations required to sort the stack
 
 ## Run checker
 
@@ -49,7 +49,7 @@ it will produce the least commands required to sort the stack
 ./push_swap 9 4 8 7 1 3 6 2 5 | ./checker 9 4 8 7 1 3 6 2 5
 ```
 
-it will check that produced commands are sorting the stack correctly
+it will check that produced operations are sorting the stack correctly
 
 ## push_swap visualiser
 
